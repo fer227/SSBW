@@ -1,5 +1,15 @@
 {% extends 'base.html' %}
 
 {% block contenido %}
-	Hola desde index
+<div class="mb-3">
+	<form method="post" action="{% url 'buscar' %}">{% csrf_token %}
+		<label for="exampleFormControlInput1" class="form-label">Busca tu excursión</label>
+		<input type="text" name="busqueda" class="form-control" id="exampleFormControlInput1" placeholder="...">
+	</form>
+</div>
+
+{% if buscado%}
+	Se ha buscado {{buscado}}
+{%endif%}
+
 {% endblock %}

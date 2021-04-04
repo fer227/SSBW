@@ -5,3 +5,12 @@ from .models import Excursion
 def index(request):
 	excursiones = Excursion.objects.all()
 	return render(request, 'senderos/index.html', {'excursiones': excursiones})
+
+def buscar(request):
+	busqueda = request.POST.get('busqueda', '')
+
+	context = {
+		'buscado' : busqueda,
+	}
+
+	return render(request, 'senderos/index.html', context)
