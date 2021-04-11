@@ -8,6 +8,10 @@
 	</form>
 </div>
 
+{% for e in excursiones %}
+	{{ e.nombre }}
+{% endfor %}
+
 {% if buscado%}
 	Se ha buscado {{buscado}}
 {%endif%}

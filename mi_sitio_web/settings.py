@@ -75,12 +75,19 @@ WSGI_APPLICATION = 'mi_sitio_web.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+import mongoengine
+mongoengine.connect(db='senderos_db', host='mongo', username='', password='')
+
+# DATABASES = {
+#     'default' : {
+#         'ENGINE' : 'django_mongodb_engine',
+#         'NAME' : 'senderos_db'
+#     }
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': BASE_DIR / 'db.sqlite3',
+#    }
+#}
 
 
 # Password validation
