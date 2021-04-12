@@ -49,7 +49,7 @@ fotos = [
 	}
 ]
 
-excursion = Excursion(nombre="Primera excursión", descripcion="Una descripción", likes=1, 
+excursion = Excursion(nombre="Tercera excursión", descripcion="Granada", likes=0, 
                       tags=['fácil'], comentarios=comentarios, fotos=fotos)
 excursion.save() # Para escribir en la BD
 
