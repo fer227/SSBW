@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Excursion
+from .models import Excursion, ExcursionForm
 from mongoengine.queryset.visitor import Q
 
 # Create your views here.
@@ -16,3 +16,12 @@ def buscar(request):
 	}
 
 	return render(request, 'senderos/index.html', context)
+
+def add(request):
+	form = ExcursionForm()
+
+	context = {
+		'form': form
+	}
+
+	return render(request, 'senderos/add.html', context)

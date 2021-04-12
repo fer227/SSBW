@@ -1,4 +1,6 @@
 from django.db import models
+from django import forms
+from django.core.validators import FileExtensionValidator
 from mongoengine import Document, fields, StringField, ListField, IntField, EmbeddedDocumentField, EmbeddedDocument
 
 # Create your models here.
@@ -22,3 +24,9 @@ class Excursion(Document):
 	duracion = IntField(default=0)
 	comentarios = ListField(EmbeddedDocumentField(Comentario))
 	fotos = ListField(EmbeddedDocumentField(Foto))
+
+class ExcursionForm(forms.Form):
+	nombre = forms.CharField(max_length=120)
+	descripcion = forms.CharField(widget=forms.Textarea(attrs={"rows":5, "cols":40}))
+	foto = forms.FileField(required=True, validators=[FileExtensionValidator(allowed_extensions= ['jpg'])])
+	pie = forms.CharField(max_length=80, required=False)
