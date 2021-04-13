@@ -29,6 +29,17 @@ def add(request):
 
 	return render(request, 'senderos/add.html', context)
 
+def editar(request, id):
+	form = ExcursionForm()
+	exc = Excursion.objects.get(id=id)
+	form = ExcursionForm({'nombre': exc.nombre, 'descripcion': exc.descripcion})
+	context = {
+		'form': form,
+		'exc': exc
+	}
+
+	return render(request, 'senderos/editar.html', context)
+
 def formExcursion(request):
 
 	if request.method == 'POST':
@@ -51,3 +62,44 @@ def formExcursion(request):
 				print('Error al guardar la foto', error)
 
 	return redirect('/')
+
+def editarForm(request, id):
+
+	if request.method == 'POST':
+		form = ExcursionForm(request.POST, request.FILES)
+		if form.is_valid():
+			input_d = form.cleaned_data
+			files = request.FILES
+			exc = Excursion.objects.get(id=id)
+			exc.nombre = input_d['nombre']
+			exc.descripcion = input_d['descripcion']
+			exc.save()
+
+			if len(files) > 0:
+				try:
+					nombre_archivo = str(exc.id)
+					nombre_archivo = nombre_archivo + '.jpg'
+					ruta_foto = os.path.join(settings.BASE_DIR, 'static', 'images', nombre_archivo)
+
+					if os.path.exists(ruta_foto):
+						os.remove(ruta_foto)
+
+					with open(ruta_foto, 'wb+') as arch:
+						for chunk in files['foto'].chunks():
+							arch.write(chunk)
+
+					exc.fotos = [Foto(pie=input_d.get('pie'), file=nombre_archivo)]
+					exc.save()
+				except OSError as error:
+					print('Error al guardar la foto', error)
+
+	return redirect('/')
+
+def detalle(request, id):
+	exc = Excursion.objects.get(id=id)
+
+	context = {
+		'excursion': exc
+	}
+
+	return render(request, 'senderos/detalle.html', context)
