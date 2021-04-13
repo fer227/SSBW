@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 
 {% block contenido %}
-<div class="mb-3">
+<h1>Bienvenido a Senderos</h1>
+<div class="mb-3 mt-1">
 	<form method="post" action="{% url 'buscar' %}">{% csrf_token %}
 		<label for="exampleFormControlInput1" class="form-label">Busca tu excursión</label>
 		<input type="text" name="busqueda" class="form-control" id="exampleFormControlInput1" placeholder="...">

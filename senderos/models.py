@@ -9,7 +9,7 @@ class Comentario(EmbeddedDocument):
 	contenido = StringField(required=True)
 
 class Foto(EmbeddedDocument):
-	pie = StringField(required=True)
+	pie = StringField(required=False)
 	file = StringField(required=True)
 
 class Excursion(Document):
@@ -27,6 +27,6 @@ class Excursion(Document):
 
 class ExcursionForm(forms.Form):
 	nombre = forms.CharField(max_length=120)
-	descripcion = forms.CharField(widget=forms.Textarea(attrs={"rows":5, "cols":40}))
+	descripcion = forms.CharField(widget=forms.Textarea(attrs={"rows":3, "cols":40}))
 	foto = forms.FileField(required=True, validators=[FileExtensionValidator(allowed_extensions= ['jpg'])])
 	pie = forms.CharField(max_length=80, required=False)

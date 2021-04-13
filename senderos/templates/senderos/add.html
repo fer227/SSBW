@@ -1,6 +1,25 @@
 {% extends 'base.html' %}
 
 {% block contenido %}
+<h1>Añadir una nueva excursión</h1>
 
+<div class="card">
+    <div class="card-header">
+      Rellena los campos
+    </div>
+    <div class="card-body">
+        <form action="{% url 'formExcursion' %}" method="post" enctype="multipart/form-data"> 
+            {% csrf_token %}
+            <table>
+                {{ form.as_table }}
+            </table>
+            <button type="submit" href="#" class="btn mt-2 w-100 btn-outline-dark">Pulsa para añadir</a>
+        </form>
+    </div>
+  </div>
+
+<div class="container">
+    
+</div>
 
 {% endblock %}
