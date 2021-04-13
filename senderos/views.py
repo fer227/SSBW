@@ -44,7 +44,8 @@ def formExcursion(request):
 				with open(ruta_foto, 'wb+') as arch:
 					for chunk in files['foto'].chunks():
 						arch.write(chunk)
-				exc.foto = [Foto(pie=input_d.get('pie'), file=nombre_archivo)]
+
+				exc.fotos = [Foto(pie=input_d.get('pie'), file=nombre_archivo)]
 				exc.save()
 			except OSError as error:
 				print('Error al guardar la foto', error)
