@@ -2,8 +2,12 @@
 
 {% block contenido %}
 <div class="container">
-    <div class="text-end"><a type="button" href="{% url 'editar' id=excursion.id %}" class="btn btn-outline-warning">Editar</a></div><br>
-    <div class="card mb-3">
+    <div class="text-end">
+        <a type="button" href="{% url 'editar' id=excursion.id %}" class="btn btn-outline-warning">Editar</a>
+        <a type="button" href="{% url 'eliminar' id=excursion.id %}" class="btn btn-outline-danger">Eliminar</a>
+    </div>
+
+    <div class="card mb-3 mt-1">
         <div class="row g-0">
           <div class="col-md-4">
             {% load static %}

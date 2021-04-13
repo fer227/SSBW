@@ -103,3 +103,7 @@ def detalle(request, id):
 	}
 
 	return render(request, 'senderos/detalle.html', context)
+
+def eliminar(request, id):
+	Excursion.objects.get(id=id).delete()
+	return redirect('/')
