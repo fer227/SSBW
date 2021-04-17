@@ -23,9 +23,14 @@
                 <img src="{% static 'logo.png' %}" alt="" width="30" height="24" class="d-inline-block align-text-top">
                 Senderos
                 </a>
-                <ul class="nav navbar-nav navbar-right ml-auto">
+                <ul class="nav navbar-nav navbar-right me-5">
                   {% if user.is_authenticated %}                  
                   <li>Bienvenido <b>{{ user.username }}</b><a class="btn btn-outline-danger ms-2" href="{% url 'logout' %}">Cerrar sesión</a></li>
+                  {% else %}
+                  <li>
+                    <a href="#" class="link-dark">Regístrate</a>
+                    <a class="btn btn-outline-info ms-2" href="/accounts/login">Inicia sesión</a>
+                  </li>
                   {% endif %}
                 </ul>
             </div>
