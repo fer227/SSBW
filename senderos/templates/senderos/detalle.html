@@ -4,7 +4,30 @@
 <div class="container">
     <div class="text-end">
         <a type="button" href="{% url 'editar' id=excursion.id %}" class="btn btn-outline-warning">Editar</a>
-        <a type="button" href="{% url 'eliminar' id=excursion.id %}" class="btn btn-outline-danger">Eliminar</a>
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter">
+          Eliminar
+        </button>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Confirmación</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            ¿Estás seguro de que quieres eliminar esta excursión?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Ignorar</button>
+            <a type="button" href="{% url 'eliminar' id=excursion.id %}" class="btn btn-danger">Eliminar</a>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="card mb-3 mt-1">

@@ -1,4 +1,0 @@
-[17/Apr/2021 19:07:05] INFO [senderos.signals:22] Usuario fer acaba de terminar la sesión.
-[17/Apr/2021 19:07:20] INFO [senderos.signals:10] Usuario admin acaba de iniciar sesión.
-[17/Apr/2021 19:07:28] INFO [senderos.signals:22] Usuario admin acaba de terminar la sesión.
-[17/Apr/2021 19:07:38] INFO [senderos.signals:16] Alguien ha fallado su intento de login con el username: usuarioincorrecto
