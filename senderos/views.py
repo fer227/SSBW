@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import Excursion, ExcursionForm, Foto
 from mongoengine.queryset.visitor import Q
 from django.conf import settings
+from django.contrib import messages
 from django.shortcuts import redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
@@ -61,8 +62,10 @@ def formExcursion(request):
 
 				exc.fotos = [Foto(pie=input_d.get('pie'), file=nombre_archivo)]
 				exc.save()
+				messages.add_message(request, messages.INFO, 'Excursión añadida')
 			except OSError as error:
 				print('Error al guardar la foto', error)
+				messages.add_message(request, messages.ERROR, 'No se pudo añadir la excursión, algo fue mal')
 
 	return redirect('/')
 
@@ -93,8 +96,11 @@ def editarForm(request, id):
 
 					exc.fotos = [Foto(pie=input_d.get('pie'), file=nombre_archivo)]
 					exc.save()
+					messages.add_message(request, messages.INFO, 'Excursión editada')
+
 				except OSError as error:
 					print('Error al guardar la foto', error)
+					messages.add_message(request, messages.ERROR, 'La excursión no se pudo editar')
 
 	return redirect('/')
 
@@ -109,6 +115,7 @@ def detalle(request, id):
 
 def eliminar(request, id):
 	Excursion.objects.get(id=id).delete()
+	messages.add_message(request, messages.INFO, 'Excursión eliminada')
 	return redirect('/')
 
 class Registro(generic.CreateView):

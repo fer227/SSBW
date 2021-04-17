@@ -41,6 +41,10 @@
     </div>
 
     <div class="container" style="margin-top: 15px;">
+      {% for message in messages%}
+        <div class="alert-{{message.tags}} alert-dismissible fade show" role="alert">{{message}}</div> 
+      {% endfor %}
+
       {% block contenido %}
       
       {% endblock %}
