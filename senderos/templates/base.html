@@ -28,7 +28,7 @@
                   <li>Bienvenido <b>{{ user.username }}</b><a class="btn btn-outline-danger ms-2" href="{% url 'logout' %}">Cerrar sesión</a></li>
                   {% else %}
                   <li>
-                    <a href="#" class="link-dark">Regístrate</a>
+                    <a href="{% url 'registro' %}" class="link-dark">Regístrate</a>
                     <a class="btn btn-outline-info ms-2" href="/accounts/login">Inicia sesión</a>
                   </li>
                   {% endif %}

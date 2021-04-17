@@ -3,6 +3,9 @@ from .models import Excursion, ExcursionForm, Foto
 from mongoengine.queryset.visitor import Q
 from django.conf import settings
 from django.shortcuts import redirect
+from django.contrib.auth.forms import UserCreationForm
+from django.urls import reverse_lazy
+from django.views import generic
 import os
 
 # Create your views here.
@@ -107,3 +110,8 @@ def detalle(request, id):
 def eliminar(request, id):
 	Excursion.objects.get(id=id).delete()
 	return redirect('/')
+
+class Registro(generic.CreateView):
+    form_class = UserCreationForm
+    success_url = reverse_lazy('login')
+    template_name = 'registration/registro.html'
