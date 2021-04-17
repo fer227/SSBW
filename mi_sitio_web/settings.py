@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework_mongoengine',
     'senderos.apps.SenderosConfig'
 ]
 
@@ -78,16 +79,16 @@ WSGI_APPLICATION = 'mi_sitio_web.wsgi.application'
 import mongoengine
 mongoengine.connect(db='senderos_db', host='mongo', username='', password='')
 
-# DATABASES = {
+DATABASES = {
 #     'default' : {
-#         'ENGINE' : 'django_mongodb_engine',
-#         'NAME' : 'senderos_db'
+#        'ENGINE' : 'django.db.backends.dummy',
+#        'NAME' : 'senderos_db'
 #     }
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': BASE_DIR / 'db.sqlite3',
-#    }
-#}
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 
 # Password validation
@@ -126,6 +127,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
