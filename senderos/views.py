@@ -11,6 +11,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.http import Http404
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 import os
 
 # Create your views here.
@@ -128,6 +130,7 @@ class Registro(generic.CreateView):
     template_name = 'registration/registro.html'
 
 class ExcursionView(APIView):
+	permission_classes = (IsAuthenticatedOrReadOnly,)
 
 	def get(self, request, id):
 		try:
@@ -159,6 +162,7 @@ class ExcursionView(APIView):
 			raise Http404
 
 class ExcursionesView(APIView):
+	permission_classes = (IsAuthenticatedOrReadOnly,)
 
 	def get(self, request):
 		excursiones = Excursion.objects.all()
