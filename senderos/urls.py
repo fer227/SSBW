@@ -12,4 +12,6 @@ urlpatterns = [
     path('editar/<str:id>', views.editar, name='editar'),
     path('eliminar/<str:id>', views.eliminar, name='eliminar'),
     path('registro/', Registro.as_view(), name='registro'),
+    path('api/excursion/<id>', views.ExcursionView.as_view(), name="excursion"),
+    path('api/excursiones', views.ExcursionesView.as_view(), name="excursiones")
 ]
