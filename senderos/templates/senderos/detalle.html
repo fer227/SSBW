@@ -1,6 +1,31 @@
 {% extends 'base.html' %}
 
 {% block contenido %}
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script>
+  $(document).ready(function(){
+    $('.likes').css('cursor', 'pointer')
+
+    $('.likes').click(function(){
+      let subir = true
+      if($(this).html() == '👎'){
+        subir = false
+      }
+      ActualizarLikes(subir)
+    })
+
+    function ActualizarLikes(subir){
+      $.ajax({
+        url: '/cambiarlikes/{{excursion.id}}',
+        data: {subir:subir},
+        success: function(respuesta){
+          console.log(respuesta)
+        }
+      })
+    }
+  })
+</script>
+
 <div class="container">
     <div class="text-end">
         <a type="button" href="{% url 'editar' id=excursion.id %}" class="btn btn-outline-warning">Editar</a>
@@ -40,6 +65,9 @@
             <div class="card-body">
               <h5 class="card-title">{{excursion.nombre}}</h5>
               <p class="card-text">{{excursion.descripcion}}</p>
+              <div>
+                <span class="likes">👍</span>  <span class="likes">👎</span>   {{excursion.likes}}
+              </div>
               <div class="text-end mt-5">
                 <a href="#" class="btn btn-primary btn-lg">Unirse</a>
               </div>
