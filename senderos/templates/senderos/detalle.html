@@ -18,8 +18,10 @@
       $.ajax({
         url: '/cambiarlikes/{{excursion.id}}',
         data: {subir:subir},
-        success: function(respuesta){
-          console.log(respuesta)
+        success: function(response){
+          var likes = JSON.parse(response["likes"]);
+          console.log(likes)
+          $('#plikes').html(likes)
         }
       })
     }
@@ -66,7 +68,7 @@
               <h5 class="card-title">{{excursion.nombre}}</h5>
               <p class="card-text">{{excursion.descripcion}}</p>
               <div>
-                <span class="likes">👍</span>  <span class="likes">👎</span>   {{excursion.likes}}
+                <span class="likes">👍</span>  <span class="likes">👎</span>   <span id="plikes">{{excursion.likes}}</span>
               </div>
               <div class="text-end mt-5">
                 <a href="#" class="btn btn-primary btn-lg">Unirse</a>

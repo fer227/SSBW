@@ -5,11 +5,11 @@ from django.conf import settings
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.contrib.auth.forms import UserCreationForm
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views import generic
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from django.http import Http404
+from django.http import Http404, JsonResponse
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
@@ -118,6 +118,19 @@ def detalle(request, id):
 	}
 
 	return render(request, 'senderos/detalle.html', context)
+
+def cambiarlikes(request, id):
+	exc = Excursion.objects.get(id=id)
+	subir = request.GET.get('subir')
+
+	if subir == 'true':
+		exc.likes += 1
+	elif exc.likes != 0:
+		exc.likes -= 1
+
+	exc.save()
+
+	return JsonResponse({"likes": exc.likes}, status=200)
 
 def eliminar(request, id):
 	Excursion.objects.get(id=id).delete()
