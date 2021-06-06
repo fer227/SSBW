@@ -31,6 +31,7 @@ class ExcursionSerializer(serializers.Serializer):
 	nombre = serializers.CharField(max_length=120)
 	descripcion = serializers.CharField(max_length=360)
 	likes = serializers.IntegerField(default=0)
+	id = serializers.UUIDField()
 	file = serializers.CharField(max_length=120)
 
 	def create(self, validated_data):

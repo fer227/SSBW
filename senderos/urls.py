@@ -14,5 +14,7 @@ urlpatterns = [
     path('registro/', Registro.as_view(), name='registro'),
     path('api/excursion/<id>', views.ExcursionView.as_view(), name="excursion"),
     path('api/excursiones', views.ExcursionesView.as_view(), name="excursiones"),
-    path('cambiarlikes/<str:id>/', views.cambiarlikes, name="cambiarlikes")
+    path('cambiarlikes/<str:id>/', views.cambiarlikes, name="cambiarlikes"),
+    path('aumentarlikes/<str:id>/', views.aumentarlikes, name="aumentarlikes"),
+    path('disminuir/<str:id>/', views.disminuirlikes, name="disminuirlikes")
 ]

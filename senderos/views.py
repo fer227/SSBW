@@ -133,6 +133,25 @@ def cambiarlikes(request, id):
 
 	return JsonResponse({"likes": exc.likes}, status=200)
 
+def aumentarlikes(request, id):
+	exc = Excursion.objects.get(id=id)
+
+	exc.likes += 1
+
+	exc.save()
+
+	return JsonResponse({"likes": exc.likes}, status=200)
+
+def disminuirlikes(request, id):
+	exc = Excursion.objects.get(id=id)
+
+	if exc.likes != 0:
+		exc.likes -= 1
+
+	exc.save()
+
+	return JsonResponse({"likes": exc.likes}, status=200)
+
 def eliminar(request, id):
 	Excursion.objects.get(id=id).delete()
 	messages.add_message(request, messages.INFO, 'Excursión eliminada')
