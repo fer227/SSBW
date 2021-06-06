@@ -67,6 +67,7 @@ def formExcursion(request):
 						arch.write(chunk)
 
 				exc.fotos = [Foto(pie=input_d.get('pie'), file=nombre_archivo)]
+				exc.file = nombre_archivo
 				exc.save()
 				messages.add_message(request, messages.INFO, 'Excursión añadida')
 			except OSError as error:

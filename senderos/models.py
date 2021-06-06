@@ -2,7 +2,7 @@ from django.db import models
 from django import forms
 from rest_framework import serializers
 from django.core.validators import FileExtensionValidator
-from mongoengine import Document, fields, StringField, ListField, IntField, EmbeddedDocumentField, EmbeddedDocument
+from mongoengine import Document, fields, StringField, ListField, IntField, EmbeddedDocumentField, EmbeddedDocument, DictField
 
 # Create your models here.
 class Comentario(EmbeddedDocument):
@@ -20,6 +20,7 @@ class Excursion(Document):
 	nombre = StringField(max_length=120, required=True)
 	descripcion = StringField(required=True)
 	likes = IntField(default=0)
+	file = StringField(max_length=120, required=False)
 	visitas = IntField(default=0)
 	tags = ListField(StringField(max_length=20))
 	duracion = IntField(default=0)
@@ -29,17 +30,17 @@ class Excursion(Document):
 class ExcursionSerializer(serializers.Serializer):
 	nombre = serializers.CharField(max_length=120)
 	descripcion = serializers.CharField(max_length=360)
-	foto = serializers.FileField(required=False, allow_null='true', validators=[FileExtensionValidator(allowed_extensions= ['jpg'])])
-	pie = serializers.CharField(max_length=80, required=False)
+	likes = serializers.IntegerField(default=0)
+	fotos = DictField()
 
 	def create(self, validated_data):
 		excursion = Excursion(nombre = validated_data['nombre'], descripcion=validated_data['descripcion']).save()
 
 		if validated_data.get('foto', None) is not None:
 			if validated_data.get('pie', None) is not None:
-				excursion.foto.append(Foto(foto=validated_data['foto'], pie=validated_data['pie']))
+				excursion.foto.append(Foto(file=validated_data['foto'], pie=validated_data['pie']))
 			else:
-				excursion.foto.append(Foto(foto=validated_data['foto'], pie=None))
+				excursion.foto.append(Foto(file=validated_data['foto'], pie=None))
 			
 		excursion.save()
 		return excursion
