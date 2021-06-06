@@ -1,24 +1,19 @@
-import logo from './logo.svg';
+import logo from './logo.png';
 import './App.css';
+import Container from 'react-bootstrap/Container';
+import Navbar from 'react-bootstrap/Navbar';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container fluid>
+      <Navbar bg="light">
+        <Navbar.Brand href="#home">
+          <img alt="" src={logo} width="50" height="30" className="d-inline-block align-top"/>
+          <span style={{marginLeft:'2vw'}}>Senderos Granada- React</span>
+        </Navbar.Brand>
+      </Navbar>
+    </Container>
   );
 }
 
