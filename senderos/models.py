@@ -31,7 +31,7 @@ class ExcursionSerializer(serializers.Serializer):
 	nombre = serializers.CharField(max_length=120)
 	descripcion = serializers.CharField(max_length=360)
 	likes = serializers.IntegerField(default=0)
-	fotos = DictField()
+	file = serializers.CharField(max_length=120)
 
 	def create(self, validated_data):
 		excursion = Excursion(nombre = validated_data['nombre'], descripcion=validated_data['descripcion']).save()
