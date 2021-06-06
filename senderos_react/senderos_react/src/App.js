@@ -25,6 +25,25 @@ class App extends React.Component{
     this.setState({detalle: e})
   }
 
+  actualizarLikes = (like, id) => {
+    var url;
+    var new_detalle = this.state.detalle;
+    if(like == "aumentar"){
+      url = "http://localhost:8000/aumentarlikes/" + id
+      new_detalle.likes += 1;
+    }
+    else{
+      url = "http://localhost:8000/disminuir/" + id
+      if(new_detalle.likes != 0){
+        new_detalle.likes -= 1;
+      }
+    }
+
+    fetch(url).then((res) => {
+      this.setState({detalle: new_detalle})
+    })
+  }
+
   goBack = () => {
     this.setState({detalle: null})
   }
@@ -55,7 +74,7 @@ class App extends React.Component{
                       <h5 className="card-title">{this.state.detalle.nombre}</h5>
                       <p className="card-text">{this.state.detalle.descripcion}</p>
                       <div>
-                        <span className="likes">👍</span>  <span className="likes">👎</span>   <span id="plikes">{this.state.detalle.likes}</span>
+                        <span style={{cursor: "pointer"}} onClick={() => this.actualizarLikes("aumentar", this.state.detalle.id)} >👍</span> <span style={{cursor: "pointer"}} onClick={() => this.actualizarLikes("disminuir", this.state.detalle.id)} >👎</span>  <span id="plikes">{this.state.detalle.likes}</span>
                       </div>
                       <div className="text-end mt-5">
                         <a href="#" className="btn btn-primary btn-lg">Unirse</a>
